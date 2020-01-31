@@ -1,0 +1,65 @@
+import org.gradle.plugins.ide.eclipse.model.Facet
+ 
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'eclipse-wtp'
+
+webAppDirName = 'web'
+sourceSets.main.java.srcDir 'src'
+sourceSets.main.resources.srcDir 'config'
+
+
+
+ 
+compileJava.options.encoding = 'UTF-8'
+
+sourceCompatibility = 1.7
+
+eclipse {
+    wtp {
+        facet {
+            facet name: 'jst.web', version: '2.5'
+            facet name: 'jst.java', version: '1.7'
+        }
+    }
+}    
+
+repositories {
+    jcenter()	
+}
+ 
+dependencies {
+
+	// Servlet API
+ 	providedCompile 'javax.servlet:javax.servlet-api:4.0.0'
+    // JSP API
+  	providedCompile 'javax.servlet.jsp:jsp-api:2.2'
+
+	//標籤
+	//compile group: 'javax.servlet.jsp.jstl', name: 'jstl', version: '1.2'
+	//compile group: 'org.apache.taglibs', name: 'taglibs-standard-impl', version: '1.2.5'
+	
+	//JSR303資料驗證標準
+	//compile group: 'org.hibernate', name: 'hibernate-validator', version: '5.0.0.CR2'
+	//compile group: 'org.hibernate', name: 'hibernate-validator-annotation-processor', version: '5.0.0.CR2'
+	
+	//文件上傳
+	compile group: 'commons-fileupload', name: 'commons-fileupload', version: '1.2.1'
+	compile group: 'commons-io', name: 'commons-io', version: '2.0'
+
+	//返回json需要的jar包
+	compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.1.5'
+	compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.1.5'
+	compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.1.5'
+ 
+    //Spring
+    compile group: 'org.springframework', name: 'spring-beans', version: '4.0.0.RELEASE'
+    compile group: 'org.springframework', name: 'spring-context', version: '4.0.0.RELEASE'
+    compile group: 'org.springframework', name: 'spring-core', version: '4.0.0.RELEASE'
+    compile group: 'org.springframework', name: 'spring-expression', version: '4.0.0.RELEASE'
+	compile group: 'org.springframework', name: 'spring-web', version: '4.0.0.RELEASE'
+	compile group: 'org.springframework', name: 'spring-webmvc', version: '4.0.0.RELEASE'
+
+
+
+}
